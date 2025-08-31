@@ -70,4 +70,51 @@ for fastq_file in fastq_files:
     except Exception as e:
         print(f"An error occurred during conversion: {e}")
 
+#Extracting the K-Mers from the SRR34219405 FASTA File
+
+from collections import defaultdict
+from Bio import SeqIO
+import os
+
+def extract_kmers_from_fasta(fasta_file, k):
+    """
+    Extracts k-mers from all sequences in a FASTA file.
+
+    Args:
+        fasta_file (str): Path to the input FASTA file.
+        k (int): The length of the k-mers.
+
+    Returns:
+        set: A set of unique k-mers found in the sequences.
+    """
+    all_kmers = set()
+    try:
+        for record in SeqIO.parse(fasta_file, "fasta"):
+            sequence = str(record.seq).upper()
+            if len(sequence) >= k:
+                for i in range(len(sequence) - k + 1):
+                    kmer = sequence[i:i + k]
+                    all_kmers.add(kmer)
+    except FileNotFoundError:
+        print(f"Error: The file '{fasta_file}' was not found.")
+        return None
+    return all_kmers
+
+# Example usage
+output_dir = "." # Output directory is current directory
+fasta_files_in_dir = [os.path.join(output_dir, f) for f in os.listdir(output_dir) if f.endswith(".fasta")]
+
+gene_kmers = set()
+k_value = 21 # The desired length of your k-mers
+
+for fasta_file in fasta_files_in_dir:
+    print(f"Extracting k-mers from {fasta_file}...")
+    kmers_from_file = extract_kmers_from_fasta(fasta_file, k_value)
+    if kmers_from_file:
+        gene_kmers.update(kmers_from_file)
+
+if gene_kmers:
+    print(f"Found {len(gene_kmers)} unique k-mers from the genes.")
+    # You can now proceed to compare these k-mers with other datasets
+
 print(f"Conversion process for {SRA_ID_1} completed.")
