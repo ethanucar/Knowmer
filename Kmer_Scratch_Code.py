@@ -37,3 +37,11 @@ for fastq_file in fastq_files:
         print(f"Successfully loaded {fastq_file}")
         except Exception as e:
             print(f"Error loading {fastq_file}: {e}")
+
+#Download FASTQ Files Using fasterq-dump from SRA
+#Sequence Read Archive
+
+SRA_ID_1 = "SRR34219405"  # Example SRA ID 1
+!fasterq-dump {SRA_ID_1} --split-files --threads 4
+
+
