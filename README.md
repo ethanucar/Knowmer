@@ -8,3 +8,9 @@ Cock, P.J.A. et al. Biopython: freely available Python tools for computational m
 
 # Software Requirements
 We recommend to use Google Colab or the most updated version of Jupyter Notebooks (Helpful Guide: https://www.geeksforgeeks.org/installation-guide/install-jupyter-notebook-in-windows/)  & Anaconda Navigator (Helfpul Guide: https://www.anaconda.com/docs/tools/anaconda-navigator/install). 
+
+# Jupyter Notebook Software Requirements for Windows Users
+1. Python 3.7 or later
+2. Windows 7 or later
+3. RAM: 4GB (atleast), 8GB or more is recommended
+4. Storage: 1GB or more
